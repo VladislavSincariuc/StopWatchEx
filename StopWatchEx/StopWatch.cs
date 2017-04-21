@@ -5,31 +5,32 @@ namespace StopWatchEx
     public class StopWatch
     {
         private DateTime _startTime;
+        private DateTime _endTime;
         private bool _isStart;
-        private int _timeSpan;
+
         public void Start()
         {
             if (_isStart)
-            {
-                Console.WriteLine("You must stop before restart!");
-            }
-            else
-            {
-                _startTime = DateTime.Now;
-                _isStart = true;
-                Console.WriteLine("Start...");
-            }
+                throw new InvalidOperationException("You must stop before restart!");
+            
+          _startTime = DateTime.Now;
+          _isStart = true;
+          Console.WriteLine("Start...");
+            
         }
         public void Stop()
         {
-            if (_isStart)
-            {
-                _timeSpan = (int)(DateTime.Now - _startTime).TotalSeconds;
-                Console.WriteLine("Time: {0}s.", _timeSpan);
-            }
-            else
-                Console.WriteLine("You must star before stop!");
+            if (!_isStart)
+            
+                throw new InvalidOperationException("You must stop before restart!");
 
+          _endTime = DateTime.Now;
+          _isStart = false;
+        }
+
+        public TimeSpan GetInterval()
+        {
+            return _endTime - _startTime;
         }
     }
 }

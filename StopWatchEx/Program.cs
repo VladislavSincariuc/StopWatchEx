@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Dynamic;
 
 namespace StopWatchEx
 {
@@ -21,6 +22,7 @@ namespace StopWatchEx
                             break;
                         case "0":
                             stopWatch.Stop();
+                            Console.WriteLine("Duration was: " + stopWatch.GetInterval().Seconds + "s");
                             break;
                         default:
                             Console.WriteLine("Make sure you Type the correct Key!");
